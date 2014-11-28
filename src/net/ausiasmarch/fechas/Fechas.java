@@ -230,11 +230,17 @@ public class Fechas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
-
+        //String mensaje;
         //Date d = new Date();
         GregorianCalendar gc = new GregorianCalendar();
         
-        gc.setTime(Convert.parseDateTime(this.jTextFieldFechaHora.getText()));
+        if (Convert.isValidDateTime(jTextFieldFechaHora.getText())){
+            
+         /*   mensaje("Fwcha invalida");
+            return;
+        }*/
+        
+        gc.setTime(Convert.parseDateTime(jTextFieldFechaHora.getText()));
 
         int dia = gc.get(Calendar.DAY_OF_MONTH); //dia del mes 
         int mes = gc.get(Calendar.MONTH) +1; //mes, de 0 a 11, "+1" para que aparezca el mes exacto en su respectivo campo

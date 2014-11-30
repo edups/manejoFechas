@@ -236,16 +236,24 @@ public class Fechas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
+        
+        //Limpiamos los campos de salida
+        jTextFieldDia.setText("");
+        jTextFieldMes.setText("");
+        jTextFieldAnyo.setText("");
+        jTextFieldHoras.setText("");
+        jTextFieldMinutos.setText("");
+        jTextFieldSegundos.setText("");
 
         GregorianCalendar gc = new GregorianCalendar();
 
         //Obtenemos y validamos la fecha 
         if (!Convert.isValidDateTime(jTextFieldFechaHora.getText())) {
-            mensaje("Formato de fecha no válido,\n por favor utilice dd/mm/aaaa hh:mm:ss");
+            mensaje("Fecha o formato no válido,\n por favor, utilice un formato válido. \n\n Ejemplo: 08/04/2014 14:52:31");
             return;
         }
         gc.setTime(Convert.parseDateTime(jTextFieldFechaHora.getText()));
-
+               
         //obtenemos los campos que componen la fecha y hora
         int dia = gc.get(GregorianCalendar.DAY_OF_MONTH); //dia del mes 
         int mes = gc.get(GregorianCalendar.MONTH) + 1; //mes, de 0 a 11, "+1" para que aparezca el mes exacto en su respectivo campo de resultado
@@ -267,16 +275,24 @@ public class Fechas extends javax.swing.JFrame {
 
     private void jButtonSumarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSumarActionPerformed
 
+         //Limpiamos los campos de salida e introd
+        jTextFieldResultado.setText("");
+       
+        
         GregorianCalendar gc = new GregorianCalendar();
         
         //Obtenemos y validamos la fecha 
         if (!Convert.isValidDate(jTextFieldFechaHora1.getText())) {
-            mensaje("Formato de fecha no válido,\n por favor utilice dd/mm/aaaa");
+            mensaje("Fecha o formato no válido,\n por favor, utilice un formato válido. \n\n Ejemplo: 29/03/2014");
             return;
         }
 
         gc.setTime(Convert.parseDate(jTextFieldFechaHora1.getText()));
 
+        if(!Convert.isValidInt(jTextFieldAnyadir.getText())){
+            mensaje("Datos del campo añadir no válidos");
+            return;
+        }
         /**
          * Switch para añadir a la fecha, según se haya seleccionado en el ComboBox,
          * días, meses o años

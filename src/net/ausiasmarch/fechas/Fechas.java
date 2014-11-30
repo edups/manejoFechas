@@ -9,6 +9,7 @@ import net.ausiasmarch.common.Convert;
 import java.util.*;
 
 /**
+ * Programa para obtener y manejar datos de fechas
  *
  * @author Eduardo Pecino Soriano
  */
@@ -238,12 +239,14 @@ public class Fechas extends javax.swing.JFrame {
 
         GregorianCalendar gc = new GregorianCalendar();
 
+        //Obtenemos y validamos la fecha 
         if (!Convert.isValidDateTime(jTextFieldFechaHora.getText())) {
             mensaje("Formato de fecha no válido,\n por favor utilice dd/mm/aaaa hh:mm:ss");
             return;
         }
         gc.setTime(Convert.parseDateTime(jTextFieldFechaHora.getText()));
 
+        //obtenemos los campos que componen la fecha y hora
         int dia = gc.get(GregorianCalendar.DAY_OF_MONTH); //dia del mes 
         int mes = gc.get(GregorianCalendar.MONTH) + 1; //mes, de 0 a 11, "+1" para que aparezca el mes exacto en su respectivo campo de resultado
         int anyo = gc.get(GregorianCalendar.YEAR); //año int 
@@ -251,6 +254,7 @@ public class Fechas extends javax.swing.JFrame {
         int minutos = gc.get(GregorianCalendar.MINUTE);
         int segundos = gc.get(GregorianCalendar.SECOND);
 
+        //Mostramos el resultado de los campos con el formato adecuado
         jTextFieldDia.setText(Convert.format(dia));
         jTextFieldMes.setText(Convert.format(mes));
         jTextFieldAnyo.setText(Convert.format(anyo));
@@ -262,27 +266,34 @@ public class Fechas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCalcularActionPerformed
 
     private void jButtonSumarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSumarActionPerformed
-           
+
         GregorianCalendar gc = new GregorianCalendar();
         
-        if(!Convert.isValidDate(jTextFieldFechaHora1.getText())){
+        //Obtenemos y validamos la fecha 
+        if (!Convert.isValidDate(jTextFieldFechaHora1.getText())) {
             mensaje("Formato de fecha no válido,\n por favor utilice dd/mm/aaaa");
             return;
         }
-        
+
         gc.setTime(Convert.parseDate(jTextFieldFechaHora1.getText()));
-        
-       switch (jComboBoxUnidades.getSelectedIndex()){
-           case 0: 
-              gc.add(GregorianCalendar.DAY_OF_MONTH, Convert.parseInt(jTextFieldAnyadir.getText()));break;
-           case 1:
-              gc.add(GregorianCalendar.MONTH, Convert.parseInt(jTextFieldAnyadir.getText())); break;
-           case 2:
-              gc.add(GregorianCalendar.YEAR, Convert.parseInt(jTextFieldAnyadir.getText()));     
-            
-       }
-       Date resultado = gc.getTime();
-       jTextFieldResultado.setText(Convert.format(resultado));
+
+        /**
+         * Switch para añadir a la fecha, según se haya seleccionado en el ComboBox,
+         * días, meses o años
+         */
+        switch (jComboBoxUnidades.getSelectedIndex()) {
+            case 0:
+                gc.add(GregorianCalendar.DAY_OF_MONTH, Convert.parseInt(jTextFieldAnyadir.getText()));
+                break;
+            case 1:
+                gc.add(GregorianCalendar.MONTH, Convert.parseInt(jTextFieldAnyadir.getText()));
+                break;
+            case 2:
+                gc.add(GregorianCalendar.YEAR, Convert.parseInt(jTextFieldAnyadir.getText()));
+
+        }
+        Date resultado = gc.getTime();
+        jTextFieldResultado.setText(Convert.format(resultado));
     }//GEN-LAST:event_jButtonSumarActionPerformed
 
     private void jButtonAhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAhoraActionPerformed
@@ -315,7 +326,7 @@ public class Fechas extends javax.swing.JFrame {
     private void mensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAhora;
     private javax.swing.JButton jButtonCalcular;
